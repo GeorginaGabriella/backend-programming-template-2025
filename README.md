@@ -1,18 +1,73 @@
-# Backend Programming Template (2025)
+# 🎰 Gacha API
 
-## Development Setup
+API sederhana untuk sistem undian (gacha) menggunakan Node.js, Express, dan MongoDB.
 
-1. Fork and clone this repository to your local computer.
-2. Open the project using VS Code.
-3. Install the recommended VS Code extensions: `ESLint` and `Prettier`.
-4. Copy and rename `.env.example` to `.env`. Open `.env` and change the database connection string.
-5. Run `npm install` to install the project dependencies.
-6. Run `npm run dev` to start the dev server.
-7. Test the endpoints in the API client app.
+---
 
-## Add New API Endpoints
+## 📌 Base URL
+http://localhost:5000/api
 
-1. Create a new database schema in `./src/models`.
-2. Create a new folder in `./src/api/components` (if needed). Remember to separate your codes to repositories, services, controllers, and routes.
-3. Add the new route in `./src/api/routes.js`.
-4. Test your new endpoints in the API client app.
+---
+
+## 🚀 Endpoint
+
+### 1. POST /api/gacha
+
+Digunakan untuk melakukan gacha.
+
+#### Request Body
+```json
+{
+  "userId": "Georgina Gabriella"
+}
+
+Keterangan
+userId (string) → ID atau nama user yang melakukan gacha
+
+Response
+- Jika tidak menang:
+{
+  "message": "Zonk! Anda Kurang Beruntung, Coba Lagi 😢"
+}
+
+- Jika menang:
+{
+  "message": "🎉 Selamat Anda Menang!🎉",
+  "hadiah": "Pulsa Rp50.000"
+}
+
+- Jika melebihi limit:
+{
+  "statusCode": 400,
+  "error": "VALIDATION_ERROR",
+  "message": "Limit gacha 5x per hari"
+}
+
+2. GET /api/gacha/history/:userId
+Digunakan untuk melihat histori gacha user.
+
+Parameter:
+- userId (string) → ID atau nama user
+
+Contoh:
+GET /api/gacha/history/Georgina Gabriella
+
+3. GET /api/gacha/prizes
+Digunakan untuk melihat daftar hadiah dan sisa kuota.
+
+Parameter:
+- Tidak ada
+
+4. GET /api/gacha/winners
+Digunakan untuk melihat daftar pemenang.
+
+Parameter:
+- Tidak ada
+
+Keterangan:
+- Nama user akan disamarkan
+
+⚙️ Rules
+- Setiap user hanya dapat melakukan gacha maksimal 5 kali per hari
+- Hadiah memiliki kuota terbatas (bukan per hari)
+- Semua data disimpan di MongoDB
