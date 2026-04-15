@@ -25,9 +25,14 @@ async function getHistory(userId) {
   return Gacha.find({ userId });
 }
 
+async function getAllWinners() {
+  return Gacha.find({ isWin: true });
+}
+
 module.exports = {
   create,
   countUserToday,
   countHadiah,
   getHistory,
+  getAllWinners,
 };

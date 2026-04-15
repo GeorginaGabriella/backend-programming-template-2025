@@ -17,4 +17,36 @@ async function gacha(request, response, next) {
   }
 }
 
-module.exports = { gacha };
+async function getHistory(req, res, next) {
+  try {
+    const data = await service.getHistory(req.params.userId);
+    return res.status(200).json(data);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function getPrizes(req, res, next) {
+  try {
+    const data = await service.getPrizes();
+    return res.status(200).json(data);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function getWinners(req, res, next) {
+  try {
+    const data = await service.getWinners();
+    return res.status(200).json(data);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+module.exports = {
+  gacha,
+  getHistory,
+  getPrizes,
+  getWinners,
+};
