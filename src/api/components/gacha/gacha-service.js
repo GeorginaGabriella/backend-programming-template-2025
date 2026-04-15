@@ -9,7 +9,7 @@ const HADIAH = [
 ];
 
 async function gacha(userId) {
-  // limit 5x
+
   const total = await repo.countUserToday(userId);
   if (total >= 5) {
     throw new Error('Limit gacha 5x per hari');
@@ -19,7 +19,7 @@ async function gacha(userId) {
 
   if (!isWin) {
     await repo.create({ userId, isWin: false });
-    return { message: 'Zonk 😢' };
+    return { message: 'Zonk ! Anda Kurang Beruntung 😢' };
   }
 
   const available = [];
@@ -45,7 +45,7 @@ async function gacha(userId) {
   });
 
   return {
-    message: 'Menang 🎉',
+    message: '🎉 Selamat Anda Menang ! 🎉',
     hadiah: hadiah.name,
   };
 }

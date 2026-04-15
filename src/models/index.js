@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const config = require('../core/config');
 const logger = require('../core/logger')('app');
 
-// 🔥 GANTI KE NON-SRV (ANTI ERROR DNS)
+
 const connection =
   'mongodb://GeorginaGabriella:API05BackEnd88Jina@ac-umafp0z-shard-00-00.cqgtkok.mongodb.net:27017,ac-umafp0z-shard-00-01.cqgtkok.mongodb.net:27017,ac-umafp0z-shard-00-02.cqgtkok.mongodb.net:27017/gacha_db?ssl=true&replicaSet=atlas-41wevb-shard-0&authSource=admin';
 
