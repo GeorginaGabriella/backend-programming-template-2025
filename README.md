@@ -152,5 +152,4 @@ http://localhost:5000
 ---
 
 ## 👩‍💻 Author
-NIM   : 535250014
-NAMA  : Georgina Gabriella
+535250014 | Georgina Gabriella
