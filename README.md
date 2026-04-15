@@ -103,10 +103,24 @@ Digunakan untuk melihat daftar pemenang.
 
 ---
 
+## 🎁 Daftar Hadiah
+
+| No | Hadiah              | Kuota |
+|----|--------------------|-------|
+| 1  | Emas 10 gram       | 1     |
+| 2  | Smartphone X       | 5     |
+| 3  | Smartwatch Y       | 10    |
+| 4  | Voucher Rp100.000  | 100   |
+| 5  | Pulsa Rp50.000     | 500   |
+
+---
+
 ## ⚙️ Rules
 
 * Setiap user hanya dapat melakukan gacha maksimal **5 kali per hari**
-* Hadiah memiliki kuota terbatas (bukan per hari)
+* Jika melebihi batas, akan mendapatkan error
+* Setiap hadiah memiliki kuota terbatas
+* Kuota hadiah berlaku untuk 1 periode undian (bukan harian)
 * Semua data disimpan di MongoDB
 
 ---
@@ -128,6 +142,12 @@ http://localhost:5000
 * Node.js
 * Express.js
 * MongoDB (Mongoose)
+
+---
+
+## 📸 Testing
+* Echo API
+* Postman
 
 ---
 
