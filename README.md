@@ -63,7 +63,8 @@ Content-Type: application/json
 
 ```json
 {
-  "user": { "userId": "Georgina Gabriella" },
+  "user": { 
+    "userId": "Georgina Gabriella" },
   "drawDate": "2026-04-16",
   "drawCountToday": 1,
   "remainingDrawsToday": 4,
@@ -80,7 +81,8 @@ Content-Type: application/json
 
 ```json
 {
-  "user": { "userId": "Georgina Gabriella" },
+  "user": { 
+    "userId": "Georgina Gabriella" },
   "drawDate": "2026-04-16",
   "drawCountToday": 1,
   "remainingDrawsToday": 4,
@@ -99,6 +101,7 @@ Content-Type: application/json
 {
   "statusCode": 400,
   "error": "VALIDATION_ERROR",
+  "description": "Invalid request",
   "message": "Limit gacha 5x per hari"
 }
 ```
