@@ -112,7 +112,7 @@ Content-Type: application/json
 
 * Setiap request akan menambah jumlah percobaan user pada hari tersebut
 * Batas maksimal adalah **5 kali per hari**
-* Reset limit dilakukan setiap hari berdasarkan tanggal server
+* Reset limit dilakukan setiap hari berdasarkan pada tanggal server
 
 ### Kemungkinan Error
 
@@ -228,6 +228,30 @@ Melihat daftar pemenang.
 * Hadiah memiliki kuota terbatas
 * Kuota berlaku untuk **1 periode undian (bukan harian)**
 * Semua aktivitas disimpan di MongoDB
+
+---
+
+## 🎲 Mekanisme Random
+
+* Sistem gacha menggunakan fungsi random (Math.random()) untuk menentukan hasil undian
+* Hadiah dipilih secara acak dari daftar hadiah yang masih memiliki kuota tersedia
+* Jika hadiah sudah habis, maka tidak akan dipilih kembali
+
+---
+
+## 🛡️ Validasi Sistem
+
+* Sistem memastikan bahwa hadiah tidak akan diberikan jika kuota telah habis
+* Sistem menghitung jumlah percobaan user berdasarkan tanggal (per hari)
+* Jika user melebihi batas 5x, maka request akan ditolak
+
+---
+
+## 🎭 Masking Nama Pemenang
+
+* Nama pemenang disamarkan (masking) untuk menjaga privasi
+* Proses masking dilakukan secara acak pada beberapa karakter dalam nama
+* Contoh: "Georgina Gabriella" → "G**r*ina Ga*ri*l*a"
 
 ---
 
