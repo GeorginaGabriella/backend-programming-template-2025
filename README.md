@@ -30,12 +30,14 @@ Digunakan untuk melakukan gacha.
 
 #### Response
 
+#### Jika Kalah
+
 ```json
 {
   "user": {
     "userId": "Georgina Gabriella"
   },
-  "drawDate": "2026-04-15",
+  "drawDate": "2026-04-16",
   "drawCountToday": 1,
   "remainingDrawsToday": 4,
   "result": {
@@ -54,7 +56,7 @@ Digunakan untuk melakukan gacha.
   "user": {
     "userId": "Georgina Gabriella"
   },
-  "drawDate": "2026-04-15",
+  "drawDate": "2026-04-16",
   "drawCountToday": 1,
   "remainingDrawsToday": 4,
   "result": {
@@ -94,11 +96,11 @@ GET /api/gacha/history/user123
 ```json
 [
   {
-    "id": "69e0a771e352f1f2eb753537",
-    "userId": "Georgina Gabriella",
-    "isWin": false,
-    "hadiah": null,
-    "createdAt": "2026-04-15"
+    "id": "69e0a723e352f1f2eb753527",
+		"userId": "Georgina Gabriella",
+		"isWin": true,
+		"hadiah": "Smartwatch Y",
+		"createdAt": "2026-04-16"
   }
 ]
 ```
@@ -139,7 +141,7 @@ Melihat daftar pemenang.
     "winners": [
       {
         "maskedName": "G**r*ina Ga*ri*l*a",
-        "wonAt": "2026-04-15"
+        "wonAt": "2026-04-16"
       }
     ]
   }
