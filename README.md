@@ -10,7 +10,7 @@ Seluruh aktivitas gacha, termasuk hasil menang atau tidak, akan disimpan ke dala
 
 ## 📌 Base URL
 
-http://localhost:5000/api
+[http://localhost:5000/api](http://localhost:5000/api)
 
 ---
 
@@ -24,34 +24,42 @@ Digunakan untuk melakukan gacha.
 
 ```json
 {
-  "userId": "Georgina Gabriella"
+  "userId": "user123"
 }
 ```
-
-#### Keterangan
-
-* `userId` (string) → ID atau nama user yang melakukan gacha
 
 #### Response
 
-* Jika tidak menang:
-
 ```json
 {
-  "message": "Zonk! Anda Kurang Beruntung, Coba Lagi 😢"
+  "user": {
+    "userId": "user123"
+  },
+  "drawDate": "2026-04-15",
+  "drawCountToday": 1,
+  "remainingDrawsToday": 4,
+  "result": {
+    "isWinner": false,
+    "prize": null,
+    "message": "😢 Maaf, Anda Belum Beruntung, Coba Lagi Ya 😢"
+  },
+  "logId": "661c..."
 }
 ```
 
-* Jika menang:
+#### Jika Menang
 
 ```json
 {
-  "message": "🎉 Selamat Anda Menang! 🎉",
-  "hadiah": "Pulsa Rp50.000"
+  "result": {
+    "isWinner": true,
+    "prize": "Pulsa Rp50.000",
+    "message": "🎉 Hore! Selamat Anda Beruntung Memenangkan Hadiah!🎉"
+  }
 }
 ```
 
-* Jika melebihi limit:
+#### Jika Melebihi Limit
 
 ```json
 {
@@ -65,53 +73,88 @@ Digunakan untuk melakukan gacha.
 
 ### 2. GET /api/gacha/history/:userId
 
-Digunakan untuk melihat histori gacha user.
-
-#### Parameter
-
-* `userId` (string) → ID atau nama user
+Melihat histori gacha user.
 
 #### Contoh
 
 ```
-GET /api/gacha/history/Georgina Gabriella
+GET /api/gacha/history/user123
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "661c...",
+    "userId": "user123",
+    "isWin": false,
+    "hadiah": null,
+    "createdAt": "2026-04-15"
+  }
+]
 ```
 
 ---
 
 ### 3. GET /api/gacha/prizes
 
-Digunakan untuk melihat daftar hadiah dan sisa kuota.
+Melihat daftar hadiah dan sisa kuota.
 
-#### Parameter
+#### Response
 
-* Tidak ada
+```json
+[
+  {
+    "code": "emas-10g",
+    "name": "Emas 10 gram",
+    "quota": 1,
+    "winnerCount": 0,
+    "remainingQuota": 1
+  }
+]
+```
 
 ---
 
 ### 4. GET /api/gacha/winners
 
-Digunakan untuk melihat daftar pemenang.
+Melihat daftar pemenang.
 
-#### Parameter
+#### Response
 
-* Tidak ada
+```json
+[
+  {
+    "prizeName": "Pulsa Rp50.000",
+    "totalWinners": 2,
+    "winners": [
+      {
+        "userId": "user123",
+        "maskedName": "u*****3",
+        "wonAt": "2026-04-15"
+      }
+    ]
+  }
+]
+```
 
 #### Keterangan
 
-* Nama user akan disamarkan
+* Nama user disamarkan (masking)
+* Data diambil dari database MongoDB
 
 ---
 
 ## 🎁 Daftar Hadiah
 
-| No | Hadiah              | Kuota |
-|----|--------------------|-------|
-| 1  | Emas 10 gram       | 1     |
-| 2  | Smartphone X       | 5     |
-| 3  | Smartwatch Y       | 10    |
-| 4  | Voucher Rp100.000  | 100   |
-| 5  | Pulsa Rp50.000     | 500   |
+| No | Code         | Hadiah            | Kuota |
+| -- | ------------ | ----------------- | ----- |
+| 1  | emas-10g     | Emas 10 gram      | 1     |
+| 2  | smartphone-x | Smartphone X      | 5     |
+| 3  | smartwatch-y | Smartwatch Y      | 10    |
+| 4  | voucher-100k | Voucher Rp100.000 | 100   |
+| 5  | pulsa-50k    | Pulsa Rp50.000    | 500   |
 
 ---
 
@@ -119,9 +162,9 @@ Digunakan untuk melihat daftar pemenang.
 
 * Setiap user hanya dapat melakukan gacha maksimal **5 kali per hari**
 * Jika melebihi batas, akan mendapatkan error
-* Setiap hadiah memiliki kuota terbatas
-* Kuota hadiah berlaku untuk 1 periode undian (bukan harian)
-* Semua data disimpan di MongoDB
+* Hadiah memiliki kuota terbatas
+* Kuota berlaku untuk **1 periode undian (bukan harian)**
+* Semua aktivitas disimpan di MongoDB
 
 ---
 
@@ -133,23 +176,30 @@ npm run dev
 ```
 
 Server berjalan di:
-http://localhost:5000
+[http://localhost:5000](http://localhost:5000)
 
 ---
 
-## 🛠️ Teknologi
+## 🧪 Testing
 
-* Node.js
-* Express.js
-* MongoDB (Mongoose)
+Gunakan:
 
----
-
-## 📸 Testing
 * Echo API
 * Postman
+
+Endpoint yang diuji:
+
+* POST /api/gacha
+* GET /api/gacha/history/:userId
+* GET /api/gacha/prizes
+* GET /api/gacha/winners
 
 ---
 
 ## 👩‍💻 Author
-535250014 | Georgina Gabriella
+
+535250014 - Georgina Gabriella
+Kuis 1 Back-End Programming
+
+---
+
