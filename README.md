@@ -37,6 +37,12 @@ POST http://localhost:5000/api/gacha
 
 Melakukan proses gacha.
 
+### Headers
+
+```
+Content-Type: application/json
+```
+
 ### Request Body
 
 | Field  | Type   | Required | Description       |
