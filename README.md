@@ -24,7 +24,7 @@ Digunakan untuk melakukan gacha.
 
 ```json
 {
-  "userId": "user123"
+  "userId": "Georgina Gabriella"
 }
 ```
 
@@ -33,7 +33,7 @@ Digunakan untuk melakukan gacha.
 ```json
 {
   "user": {
-    "userId": "user123"
+    "userId": "Georgina Gabriella"
   },
   "drawDate": "2026-04-15",
   "drawCountToday": 1,
@@ -43,7 +43,7 @@ Digunakan untuk melakukan gacha.
     "prize": null,
     "message": "😢 Maaf, Anda Belum Beruntung, Coba Lagi Ya 😢"
   },
-  "logId": "661c..."
+  "logId": "69e0a771e352f1f2eb753537"
 }
 ```
 
@@ -51,11 +51,18 @@ Digunakan untuk melakukan gacha.
 
 ```json
 {
+  "user": {
+    "userId": "Georgina Gabriella"
+  },
+  "drawDate": "2026-04-15",
+  "drawCountToday": 1,
+  "remainingDrawsToday": 4,
   "result": {
     "isWinner": true,
-    "prize": "Pulsa Rp50.000",
+    "prize": "Voucher Rp100.000",
     "message": "🎉 Hore! Selamat Anda Beruntung Memenangkan Hadiah!🎉"
-  }
+  },
+  "logId": "69e0a771e352f1f2eb753537"
 }
 ```
 
@@ -65,6 +72,7 @@ Digunakan untuk melakukan gacha.
 {
   "statusCode": 400,
   "error": "VALIDATION_ERROR",
+  "description": "Invalid request",
   "message": "Limit gacha 5x per hari"
 }
 ```
@@ -86,7 +94,7 @@ GET /api/gacha/history/user123
 ```json
 [
   {
-    "id": "661c...",
+    "id": "69e0a771e352f1f2eb753537",
     "userId": "user123",
     "isWin": false,
     "hadiah": null,
