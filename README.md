@@ -138,8 +138,7 @@ Melihat daftar pemenang.
     "totalWinners": 1,
     "winners": [
       {
-        "userId": "user123",
-        "maskedName": "G****************a",
+        "maskedName": "G**r*ina Ga*ri*l*a",
         "wonAt": "2026-04-15"
       }
     ]

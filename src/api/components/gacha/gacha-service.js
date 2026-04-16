@@ -115,11 +115,20 @@ async function getPrizes() {
 
 function maskName(name) {
   return name
-    .split('')
-    .map((char, i) =>
-      i === 0 || i === name.length - 1 ? char : '*'
-    )
-    .join('');
+    .split(' ')
+    .map((word) => {
+      if (word.length <= 2) return word;
+
+      return word
+        .split('')
+        .map((char, i) => {
+          if (i === 0 || i === word.length - 1) return char;
+
+          return Math.random() < 0.5 ? char : '*';
+        })
+        .join('');
+    })
+    .join(' ');
 }
 
 async function getWinners() {
@@ -133,7 +142,6 @@ async function getWinners() {
     }
 
     grouped[item.hadiah].push({
-      userId: item.userId,
       maskedName: maskName(item.userId),
       wonAt: formatDate(item.createdAt),
     });
