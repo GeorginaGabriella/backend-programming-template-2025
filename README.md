@@ -1,6 +1,6 @@
 # 🎰 Gacha API
 
-API sederhana untuk sistem undian (gacha) yang dibangun menggunakan Node.js, Express.js, dan MongoDB. 
+API sederhana untuk sistem undian (gacha) yang dibangun menggunakan Node.js, Express.js, dan MongoDB.
 
 API ini memungkinkan user untuk melakukan gacha untuk mendapatkan hadiah tertentu berdasarkan peluang (random). Setiap user memiliki batas maksimal percobaan per hari, serta setiap hadiah memiliki kuota pemenang yang terbatas dalam satu periode.
 
@@ -10,17 +10,40 @@ Seluruh aktivitas gacha, termasuk hasil menang atau tidak, akan disimpan ke dala
 
 ## 📌 Base URL
 
-[http://localhost:5000/api](http://localhost:5000/api)
+```
+http://localhost:5000/api
+```
+
+Contoh endpoint lengkap:
+
+```
+POST http://localhost:5000/api/gacha
+```
 
 ---
 
-## 🚀 Endpoint
+## 🚀 Endpoint Summary
 
-### 1. POST /api/gacha
+| Method | Endpoint               | Deskripsi                  |
+| ------ | ---------------------- | -------------------------- |
+| POST   | /gacha                 | Melakukan gacha            |
+| GET    | /gacha/history/:userId | Melihat histori gacha user |
+| GET    | /gacha/prizes          | Melihat daftar hadiah      |
+| GET    | /gacha/winners         | Melihat daftar pemenang    |
 
-Digunakan untuk melakukan gacha.
+---
 
-#### Request Body
+## 1. POST /gacha
+
+Melakukan proses gacha.
+
+### Request Body
+
+| Field  | Type   | Required | Description       |
+| ------ | ------ | -------- | ----------------- |
+| userId | string | Yes      | Nama atau ID user |
+
+### Contoh Request
 
 ```json
 {
@@ -28,34 +51,13 @@ Digunakan untuk melakukan gacha.
 }
 ```
 
-#### Response
+### Response
 
-#### Jika Kalah
-
-```json
-{
-  "user": {
-    "userId": "Georgina Gabriella"
-  },
-  "drawDate": "2026-04-16",
-  "drawCountToday": 1,
-  "remainingDrawsToday": 4,
-  "result": {
-    "isWinner": false,
-    "prize": null,
-    "message": "😢 Maaf, Anda Belum Beruntung, Coba Lagi Ya 😢"
-  },
-  "logId": "69e0a771e352f1f2eb753537"
-}
-```
-
-#### Jika Menang
+#### ✅ Jika Menang
 
 ```json
 {
-  "user": {
-    "userId": "Georgina Gabriella"
-  },
+  "user": { "userId": "Georgina Gabriella" },
   "drawDate": "2026-04-16",
   "drawCountToday": 1,
   "remainingDrawsToday": 4,
@@ -68,50 +70,92 @@ Digunakan untuk melakukan gacha.
 }
 ```
 
-#### Jika Melebihi Limit
+#### ❌ Jika Kalah
+
+```json
+{
+  "user": { "userId": "Georgina Gabriella" },
+  "drawDate": "2026-04-16",
+  "drawCountToday": 1,
+  "remainingDrawsToday": 4,
+  "result": {
+    "isWinner": false,
+    "prize": null,
+    "message": "😢 Maaf, Anda Belum Beruntung, Coba Lagi Ya 😢"
+  },
+  "logId": "69e0a771e352f1f2eb753537"
+}
+```
+
+#### ⚠️ Jika Melebihi Limit
 
 ```json
 {
   "statusCode": 400,
   "error": "VALIDATION_ERROR",
-  "description": "Invalid request",
   "message": "Limit gacha 5x per hari"
 }
 ```
 
+### Status Code
+
+* 200 OK → Berhasil melakukan gacha
+* 400 Bad Request → Melebihi limit harian / request tidak valid
+
+### Catatan
+
+* Setiap request akan menambah jumlah percobaan user pada hari tersebut
+* Batas maksimal adalah **5 kali per hari**
+* Reset limit dilakukan setiap hari berdasarkan tanggal server
+
+### Kemungkinan Error
+
+* 400 → Limit harian tercapai
+* 400 → userId tidak dikirim
+
 ---
 
-### 2. GET /api/gacha/history/:userId
+## 2. GET /gacha/history/:userId
 
-Melihat histori gacha user.
+Melihat histori gacha berdasarkan user.
 
-#### Contoh
+### Path Parameter
+
+| Parameter | Type   | Description       |
+| --------- | ------ | ----------------- |
+| userId    | string | Nama atau ID user |
+
+### Contoh Request
 
 ```
-GET /api/gacha/history/Georgina Gabriella
+GET http://localhost:5000/api/gacha/history/Georgina Gabriella
 ```
 
-#### Response
+### Response
 
 ```json
 [
   {
     "id": "69e0a723e352f1f2eb753527",
-		"userId": "Georgina Gabriella",
-		"isWin": true,
-		"hadiah": "Smartwatch Y",
-		"createdAt": "2026-04-16"
+    "userId": "Georgina Gabriella",
+    "isWinner": true,
+    "prize": "Smartwatch Y",
+    "createdAt": "2026-04-16"
   }
 ]
 ```
 
+### Status Code
+
+* 200 OK → Data berhasil diambil
+
 ---
 
-### 3. GET /api/gacha/prizes
+## 3. GET /gacha/prizes
 
 Melihat daftar hadiah dan sisa kuota.
 
-#### Response
+### Response
 
 ```json
 [
@@ -125,13 +169,17 @@ Melihat daftar hadiah dan sisa kuota.
 ]
 ```
 
+### Status Code
+
+* 200 OK → Data berhasil diambil
+
 ---
 
-### 4. GET /api/gacha/winners
+## 4. GET /gacha/winners
 
 Melihat daftar pemenang.
 
-#### Response
+### Response
 
 ```json
 [
@@ -148,10 +196,10 @@ Melihat daftar pemenang.
 ]
 ```
 
-#### Keterangan
+### Keterangan
 
 * Nama user disamarkan (masking)
-* Data diambil dari database MongoDB
+* Data diambil dari MongoDB
 
 ---
 
@@ -185,7 +233,10 @@ npm run dev
 ```
 
 Server berjalan di:
-[http://localhost:5000](http://localhost:5000)
+
+```
+http://localhost:5000
+```
 
 ---
 
@@ -193,8 +244,8 @@ Server berjalan di:
 
 Gunakan:
 
-* Echo API
 * Postman
+* Echo API
 
 Endpoint yang diuji:
 
@@ -207,8 +258,5 @@ Endpoint yang diuji:
 
 ## 👩‍💻 Author
 
-535250014 - Georgina Gabriella
+**535250014 - Georgina Gabriella**
 Kuis 1 Back-End Programming
-
----
-
