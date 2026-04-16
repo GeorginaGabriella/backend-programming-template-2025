@@ -135,7 +135,7 @@ Melihat daftar pemenang.
 [
   {
     "prizeName": "Pulsa Rp50.000",
-    "totalWinners": 2,
+    "totalWinners": 1,
     "winners": [
       {
         "userId": "user123",
