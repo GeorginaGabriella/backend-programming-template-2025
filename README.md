@@ -2,7 +2,7 @@
 
 API sederhana untuk sistem undian (gacha) yang dibangun menggunakan Node.js, Express.js, dan MongoDB. 
 
-API ini memungkinkan user untuk melakukan gacha guna mendapatkan hadiah tertentu berdasarkan peluang (random). Setiap user memiliki batas maksimal percobaan per hari, serta setiap hadiah memiliki kuota pemenang yang terbatas dalam satu periode.
+API ini memungkinkan user untuk melakukan gacha untuk mendapatkan hadiah tertentu berdasarkan peluang (random). Setiap user memiliki batas maksimal percobaan per hari, serta setiap hadiah memiliki kuota pemenang yang terbatas dalam satu periode.
 
 Seluruh aktivitas gacha, termasuk hasil menang atau tidak, akan disimpan ke dalam database MongoDB dan dapat diakses kembali melalui endpoint yang tersedia.
 
@@ -95,7 +95,7 @@ GET /api/gacha/history/user123
 [
   {
     "id": "69e0a771e352f1f2eb753537",
-    "userId": "user123",
+    "userId": "Georgina Gabriella",
     "isWin": false,
     "hadiah": null,
     "createdAt": "2026-04-15"
@@ -139,7 +139,7 @@ Melihat daftar pemenang.
     "winners": [
       {
         "userId": "user123",
-        "maskedName": "u*****3",
+        "maskedName": "G****************a",
         "wonAt": "2026-04-15"
       }
     ]
