@@ -88,7 +88,7 @@ Melihat histori gacha user.
 #### Contoh
 
 ```
-GET /api/gacha/history/user123
+GET /api/gacha/history/Georgina Gabriella
 ```
 
 #### Response
